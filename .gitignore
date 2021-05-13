@@ -1,0 +1,6 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+/recipe-API/node_modules
+.env
