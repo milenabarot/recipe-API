@@ -7,13 +7,29 @@ const App = createReactClass({
     return {
       searchValue: "",
       recipeList: [],
+      newRecipe: {
+        title: "",
+        description: "",
+        image: "",
+        url: "",
+        dateAdded: new Date(),
+      },
     };
+  },
+
+  newRecipeInputChange(event) {
+    this.setState({
+      newRecipe: {
+        ...this.state.newRecipe,
+        [event.target.name]: event.target.value,
+      },
+    });
   },
 
   componentDidMount() {
     axios
       .get("http://localhost:3000/posts")
-      // .then((response) => response.json())
+
       .then((response) => {
         console.log(response);
 
@@ -23,12 +39,13 @@ const App = createReactClass({
           const image = recipeData.image;
           const urlLink = recipeData.url;
           const dateAdded = recipeData.dateAdded;
+          const dateAddedFormatted = new Date(dateAdded).toDateString();
           return {
             title: title,
             description: description,
             image: image,
             url: urlLink,
-            dateAdded: dateAdded,
+            dateAdded: dateAddedFormatted,
           };
         });
         this.setState({
@@ -41,11 +58,29 @@ const App = createReactClass({
       });
   },
 
-  //   searchOnInputKeyDown(event){
-  //     if (event.key === 'Enter') {
-
-  //    }
-  //  },
+  newRecipeOnSubmit(event) {
+    event.preventDefault();
+    axios
+      .post("http://localhost:3000/posts", this.state.newRecipe)
+      .then((response) => {
+        let { recipeList } = this.state;
+        recipeList.push(response.data);
+        console.log(response.data);
+        this.setState({
+          recipeList,
+          newRecipe: {
+            title: "",
+            description: "",
+            image: "",
+            url: "",
+            dateAdded: new Date(),
+          },
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
 
   render() {
     return (
@@ -59,9 +94,78 @@ const App = createReactClass({
           }}
         />
         <button className="searchButton">Search</button>
+        <form className="addNewRecipe" onSubmit={this.newRecipeOnSubmit}>
+          <label htmlFor="title"></label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={this.state.newRecipe.title}
+            placeholder="title"
+            required
+            onChange={this.newRecipeInputChange}
+          />
+          <label htmlFor="description"></label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value={this.state.newRecipe.description}
+            placeholder="description"
+            required
+            onChange={this.newRecipeInputChange}
+          />
+          <label htmlFor="image"></label>
+          <input
+            type="text"
+            id="picture"
+            name="image"
+            value={this.state.newRecipe.image}
+            placeholder="picture url"
+            required
+            onChange={this.newRecipeInputChange}
+          />
+          <label htmlFor="link"></label>
+          <input
+            type="text"
+            id="newrecipeurl"
+            name="url"
+            value={this.state.newRecipe.url}
+            placeholder="link url"
+            required
+            onChange={this.newRecipeInputChange}
+          />
+          <button type="submit">Add a recipe</button>
+        </form>
+
+        <ul className="recipeList">
+          {this.state.recipeList.map((recipe) => {
+            return (
+              <li key={recipe.url} className="recipe">
+                <p>{recipe.title}</p>
+                <p>{recipe.description}</p>
+                <img
+                  src={recipe.image}
+                  alt={recipe.title}
+                  className="recipe-image"
+                ></img>
+                <a href={recipe.url} target="_blank" rel="noreferrer">
+                  Link to recipe
+                </a>
+                <p>{recipe.dateAdded}</p>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   },
 });
 
 export default App;
+
+//   searchOnInputKeyDown(event){
+//     if (event.key === 'Enter') {
+
+//    }
+//  },

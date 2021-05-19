@@ -54,7 +54,7 @@ router.patch("/:postId", async (req, res) => {
   try {
     const updatedRecipe = await Recipe.updateOne(
       { _id: req.params.postId },
-      { $set: { title: req.body.title } }
+      { $set: { title: req.body.title, image: req.body.image } }
     );
     res.json(updatedRecipe);
   } catch (err) {

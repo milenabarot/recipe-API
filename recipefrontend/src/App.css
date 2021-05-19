@@ -1,3 +1,25 @@
 .App {
   text-align: center;
 }
+
+.recipeList {
+  list-style: none;
+}
+
+.recipe {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.recipe-image {
+  width: 300px;
+}
+
+.addNewRecipe {
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
