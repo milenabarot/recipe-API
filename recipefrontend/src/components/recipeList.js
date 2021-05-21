@@ -12,10 +12,14 @@ function RecipeList(props) {
             <label htmlFor="recipeTitle"></label>
             <input
               type="text"
-              id="recipetitle"
+              id={recipe.id}
               name="recipeTitle"
               value={recipe.title}
               required
+              onInput={props.changeOfRecipeTitle}
+              onKeyDown={(event) =>
+                props.getUpdatedRecipeList(event, recipe.id)
+              }
             ></input>
             <p>{recipe.description}</p>
             <img

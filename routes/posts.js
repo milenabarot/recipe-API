@@ -52,11 +52,13 @@ router.delete("/:postId", async (req, res) => {
 //Update a post
 router.patch("/:postId", async (req, res) => {
   try {
-    const updatedRecipe = await Recipe.updateOne(
+    const updatedRecipe = await Recipe.findOneAndUpdate(
       { _id: req.params.postId },
-      { $set: { title: req.body.title, image: req.body.image } }
+      { title: req.body.title },
+      { new: true }
     );
     res.json(updatedRecipe);
+    console.log(updatedRecipe);
   } catch (err) {
     res.json({ message: err });
   }
