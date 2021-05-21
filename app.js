@@ -10,11 +10,11 @@ require("dotenv/config");
 
 //Import Routes
 
-const postsRoute = require("./routes/posts");
+const recipesRoute = require("./routes/recipes");
 
 //Middleware
 
-app.use("/posts", postsRoute);
+app.use("/recipes", recipesRoute);
 
 //Routes
 app.get("/", (req, res) => {
@@ -22,6 +22,8 @@ app.get("/", (req, res) => {
 });
 
 //Connect to DB
+//Mongoose middle man between database and back end
+// a library to communicate with MongoDB
 
 mongoose.connect(
   process.env.DB_CONNECTION,

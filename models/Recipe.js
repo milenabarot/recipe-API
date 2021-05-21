@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// a blueprint for a recipe format
+
 const RecipeSchema = mongoose.Schema({
   title: {
     type: String,

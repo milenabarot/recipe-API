@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Recipe = require("../models/Recipe");
 
-// Gets pack all posts
+// Gets pack all recipes
 router.get("/", async (req, res) => {
   try {
     const recipes = await Recipe.find();
@@ -30,9 +30,9 @@ router.post("/", async (req, res) => {
 });
 
 //Gets back a specific post
-router.get("/:postId", async (req, res) => {
+router.get("/:recipeId", async (req, res) => {
   try {
-    const recipe = await Recipe.findById(req.params.postId);
+    const recipe = await Recipe.findById(req.params.recipeId);
     res.json(recipe);
   } catch (err) {
     res.json({ message: err });
@@ -40,9 +40,9 @@ router.get("/:postId", async (req, res) => {
 });
 
 //Delete post
-router.delete("/:postId", async (req, res) => {
+router.delete("/:recipeId", async (req, res) => {
   try {
-    const removedRecipe = await Recipe.remove({ _id: req.params.postId });
+    const removedRecipe = await Recipe.remove({ _id: req.params.recipeId });
     res.json(removedRecipe);
   } catch (err) {
     res.json({ message: err });
@@ -50,10 +50,10 @@ router.delete("/:postId", async (req, res) => {
 });
 
 //Update a post
-router.patch("/:postId", async (req, res) => {
+router.patch("/:recipeId", async (req, res) => {
   try {
     const updatedRecipe = await Recipe.findOneAndUpdate(
-      { _id: req.params.postId },
+      { _id: req.params.recipeId },
       { title: req.body.title },
       { new: true }
     );

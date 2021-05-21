@@ -3,7 +3,6 @@ import createReactClass from "create-react-class";
 import axios from "axios";
 import NewRecipe from "./components/newRecipe";
 import RecipeList from "./components/recipeList";
-import { constant } from "lodash";
 
 const App = createReactClass({
   getInitialState() {
@@ -55,8 +54,8 @@ const App = createReactClass({
 
     if (event.key === "Enter") {
       axios
-        .patch("http://localhost:3000/posts/" + id, { title: updatedTitle })
-        .then((response) => {
+        .patch("http://localhost:3000/recipes/" + id, { title: updatedTitle })
+        .then(() => {
           this.getRecipeListData();
         })
         .catch((error) => {
@@ -72,8 +71,7 @@ const App = createReactClass({
   // get recipes data
   getRecipeListData() {
     axios
-      .get("http://localhost:3000/posts")
-
+      .get("http://localhost:3000/recipes")
       .then((response) => {
         console.log(response);
 
@@ -108,7 +106,7 @@ const App = createReactClass({
   newRecipeOnSubmit(event) {
     event.preventDefault();
     axios
-      .post("http://localhost:3000/posts", this.state.newRecipe)
+      .post("http://localhost:3000/recipes", this.state.newRecipe)
       .then((response) => {
         const updatedRecipeWithNewId = {
           title: response.data.title,
@@ -140,7 +138,7 @@ const App = createReactClass({
 
   //delete recipe
   deleteRecipe(id) {
-    axios.delete("http://localhost:3000/posts/" + id).then((response) => {
+    axios.delete("http://localhost:3000/recipes/" + id).then(() => {
       this.getRecipeListData();
     });
   },
