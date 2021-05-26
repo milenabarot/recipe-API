@@ -19,6 +19,10 @@ const App = createReactClass({
     };
   },
 
+  componentDidMount() {
+    this.getRecipeListData();
+  },
+
   newRecipeInputChange(event) {
     this.setState({
       newRecipe: {
@@ -62,10 +66,6 @@ const App = createReactClass({
           console.error(error);
         });
     }
-  },
-
-  componentDidMount() {
-    this.getRecipeListData();
   },
 
   // get recipes data
@@ -143,6 +143,47 @@ const App = createReactClass({
     });
   },
 
+  //search for recipe
+
+  searchRecipe() {
+    const searchValue = this.state.searchValue;
+    if (searchValue !== "") {
+      axios
+        .get("http://localhost:3000/recipes/search/" + this.state.searchValue)
+        .then((response) => {
+          console.log(response.data);
+
+          const searchRecipeListResults = response.data.map(
+            (searchRecipeData) => {
+              const title = searchRecipeData.title;
+              const description = searchRecipeData.description;
+              const image = searchRecipeData.image;
+              const url = searchRecipeData.url;
+              const dateAdded = searchRecipeData.dateAdded;
+              const id = searchRecipeData._id;
+
+              return {
+                title: title,
+                description: description,
+                image: image,
+                url: url,
+                dateAdded: dateAdded,
+                id: id,
+              };
+            }
+          );
+          this.setState({
+            recipeList: searchRecipeListResults,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      this.getRecipeListData();
+    }
+  },
+
   render() {
     return (
       <div className="App">
@@ -154,7 +195,9 @@ const App = createReactClass({
             this.setState({ searchValue: event.target.value });
           }}
         />
-        <button className="searchButton">Search</button>
+        <button className="searchButton" onClick={this.searchRecipe}>
+          Search
+        </button>
         <NewRecipe
           newRecipeOnSubmit={this.newRecipeOnSubmit}
           newRecipe={this.state.newRecipe}

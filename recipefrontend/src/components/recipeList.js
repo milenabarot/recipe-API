@@ -21,6 +21,7 @@ function RecipeList(props) {
                 props.getUpdatedRecipeList(event, recipe.id)
               }
             ></input>
+            <p>Enter Key to update name</p>
             <p>{recipe.description}</p>
             <img
               src={recipe.image}

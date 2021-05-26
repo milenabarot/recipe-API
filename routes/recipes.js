@@ -2,11 +2,26 @@ const express = require("express");
 const router = express.Router();
 const Recipe = require("../models/Recipe");
 
-// Gets pack all recipes
+// Gets back all recipes
 router.get("/", async (req, res) => {
   try {
     const recipes = await Recipe.find();
     res.json(recipes);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+//search query get request by title of recipe, partial search
+
+router.get("/search/:title", async (req, res) => {
+  let regex = new RegExp(req.params.title, "i");
+  try {
+    const recipe = await Recipe.find({
+      title: { $regex: regex },
+    });
+    console.log(recipe);
+    res.json(recipe);
   } catch (err) {
     res.json({ message: err });
   }
