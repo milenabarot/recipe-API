@@ -1,8 +1,3 @@
-.App {
-  text-align: center;
-  margin: 20px;
-}
-
 .recipeList {
   list-style: none;
 }
@@ -16,12 +11,4 @@
 
 .recipe-image {
   width: 300px;
-}
-
-.addNewRecipe {
-  display: flex;
-
-  align-items: center;
-  flex-direction: column;
-  margin-top: 50px;
 }

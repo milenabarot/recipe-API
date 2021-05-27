@@ -1,4 +1,4 @@
-import "../styles/App.css";
+import "../styles/newRecipe.scss";
 
 function NewRecipe(props) {
   return (

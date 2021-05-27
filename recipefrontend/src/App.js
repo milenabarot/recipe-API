@@ -1,5 +1,5 @@
 import React from "react";
-import "../src/styles/App.css";
+import "../src/styles/App.scss";
 import createReactClass from "create-react-class";
 import axios from "axios";
 import NewRecipe from "./components/newRecipe";
@@ -16,7 +16,6 @@ const App = createReactClass({
         description: "",
         image: "",
         url: "",
-        dateAdded: new Date(),
       },
     };
   },
@@ -54,6 +53,7 @@ const App = createReactClass({
       recipeList: updatedRecipeList,
     });
   },
+
   //once recipeTitle has been updated, and Enter button clicked
   // patch request will be made to update database
   getUpdatedRecipeList(event, id) {
@@ -119,6 +119,7 @@ const App = createReactClass({
     axios
       .post("http://localhost:3000/recipes", this.state.newRecipe)
       .then((response) => {
+        console.log(response);
         const updatedRecipeWithNewId = {
           title: response.data.title,
           description: response.data.description,

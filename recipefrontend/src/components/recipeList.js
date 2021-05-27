@@ -1,4 +1,4 @@
-import "../styles/App.css";
+import "../styles/recipeList.scss";
 import _ from "lodash";
 
 function RecipeList(props) {

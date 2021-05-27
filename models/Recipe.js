@@ -20,7 +20,7 @@ const RecipeSchema = mongoose.Schema({
   },
   dateAdded: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
 
