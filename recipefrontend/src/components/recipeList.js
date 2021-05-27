@@ -17,11 +17,16 @@ function RecipeList(props) {
               value={recipe.title}
               required
               onInput={props.changeOfRecipeTitle}
-              onKeyDown={(event) =>
-                props.getUpdatedRecipeList(event, recipe.id)
+              onKeyDown={(event, id) =>
+                props.onEnterGetUpdatedRecipeList(event, recipe.id)
               }
             ></input>
-            <p>Enter Key to update name</p>
+            <button
+              id={recipe.id}
+              onClick={(event) => props.getUpdatedRecipeList(event, recipe.id)}
+            >
+              Update Title
+            </button>
             <p>{recipe.description}</p>
             <img
               src={recipe.image}

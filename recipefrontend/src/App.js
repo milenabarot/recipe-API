@@ -1,3 +1,4 @@
+import React from "react";
 import "../src/styles/App.css";
 import createReactClass from "create-react-class";
 import axios from "axios";
@@ -6,6 +7,7 @@ import RecipeList from "./components/recipeList";
 
 const App = createReactClass({
   getInitialState() {
+    this.searchBarRef = React.createRef();
     return {
       searchValue: "",
       recipeList: [],
@@ -20,9 +22,11 @@ const App = createReactClass({
   },
 
   componentDidMount() {
+    this.searchBarRef.current.focus();
     this.getRecipeListData();
   },
 
+  //monitors change of all input fields when adding a new recipe
   newRecipeInputChange(event) {
     this.setState({
       newRecipe: {
@@ -40,7 +44,6 @@ const App = createReactClass({
     const index = updatedRecipeList.findIndex((recipe) => {
       return recipe.id === event.target.id;
     });
-    console.log(index);
     updatedRecipeList[index] = {
       ...updatedRecipeList[index],
       title: updatedRecipeListRecipeTitle,
@@ -51,20 +54,28 @@ const App = createReactClass({
       recipeList: updatedRecipeList,
     });
   },
-  //once recipeTitle has been updated, and Enter key pressed
+  //once recipeTitle has been updated, and Enter button clicked
   // patch request will be made to update database
   getUpdatedRecipeList(event, id) {
-    const updatedTitle = event.target.value;
+    const { recipeList } = this.state;
+    const index = recipeList.findIndex((recipe) => {
+      return recipe.id === event.target.id;
+    });
+    const updatedTitle = recipeList[index].title;
 
+    axios
+      .patch("http://localhost:3000/recipes/" + id, { title: updatedTitle })
+      .then(() => {
+        this.getRecipeListData();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
+
+  onEnterGetUpdatedRecipeList(event, id) {
     if (event.key === "Enter") {
-      axios
-        .patch("http://localhost:3000/recipes/" + id, { title: updatedTitle })
-        .then(() => {
-          this.getRecipeListData();
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      this.getUpdatedRecipeList(event, id);
     }
   },
 
@@ -194,6 +205,7 @@ const App = createReactClass({
           onInput={(event) => {
             this.setState({ searchValue: event.target.value });
           }}
+          ref={this.searchBarRef}
         />
         <button className="searchButton" onClick={this.searchRecipe}>
           Search
@@ -208,6 +220,7 @@ const App = createReactClass({
           deleteRecipe={this.deleteRecipe}
           changeOfRecipeTitle={this.changeOfRecipeTitle}
           getUpdatedRecipeList={this.getUpdatedRecipeList}
+          onEnterGetUpdatedRecipeList={this.onEnterGetUpdatedRecipeList}
         />
       </div>
     );
