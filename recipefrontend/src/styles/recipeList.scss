@@ -1,14 +1,12 @@
 .recipeList {
   list-style: none;
-}
-
-.recipe {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 40px;
-}
-
-.recipe-image {
-  width: 300px;
+  &--item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px;
+  }
+  &--image {
+    width: 300px;
+  }
 }

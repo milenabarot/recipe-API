@@ -8,7 +8,7 @@ function RecipeList(props) {
     <ul className="recipeList">
       {sortedRecipeList.map((recipe, index) => {
         return (
-          <li key={index} className="recipe">
+          <li key={index} className="recipeList--item">
             <label htmlFor="recipeTitle"></label>
             <input
               type="text"
@@ -31,7 +31,7 @@ function RecipeList(props) {
             <img
               src={recipe.image}
               alt={recipe.title}
-              className="recipe-image"
+              className="recipeList--image"
             ></img>
             <a href={recipe.url} target="_blank" rel="noreferrer">
               Link to recipe

@@ -199,6 +199,7 @@ const App = createReactClass({
   render() {
     return (
       <div className="App">
+        <h1>Recipe App</h1>
         <input
           type="text"
           className="searchValue"
