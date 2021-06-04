@@ -44,7 +44,9 @@ function NewRecipe(props) {
           required
           onChange={props.newRecipeInputChange}
         />
-        <button type="submit">Add a recipe</button>
+        <button className="addNewRecipe--button" type="submit">
+          Add a recipe
+        </button>
       </form>
     </div>
   );

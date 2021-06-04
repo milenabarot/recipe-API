@@ -20,7 +20,6 @@ router.get("/search/:title", async (req, res) => {
     const recipe = await Recipe.find({
       title: { $regex: regex },
     });
-    console.log(recipe);
     res.json(recipe);
   } catch (err) {
     res.json({ message: err });
