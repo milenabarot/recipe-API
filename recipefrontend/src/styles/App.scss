@@ -5,4 +5,15 @@ body {
 .App {
   text-align: center;
   margin: 20px;
+  font-family: "Dosis", sans-serif;
+  font-size: 20px;
+  h1 {
+    font-family: "Odibee Sans", cursive;
+    font-size: 75px;
+    font-weight: lighter;
+  }
 }
+
+// BEM FORMAT
+// block--element__modifier
+// contact--form-text-area__is-selected

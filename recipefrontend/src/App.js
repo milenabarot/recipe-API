@@ -196,6 +196,13 @@ const App = createReactClass({
     }
   },
 
+  //search for recipe on enter key
+  onEnterSearchRecipe(event) {
+    if (event.key === "Enter") {
+      this.searchRecipe();
+    }
+  },
+
   render() {
     return (
       <div className="App">
@@ -207,9 +214,10 @@ const App = createReactClass({
           onInput={(event) => {
             this.setState({ searchValue: event.target.value });
           }}
+          onKeyDown={this.onEnterSearchRecipe}
           ref={this.searchBarRef}
         />
-        <button className="searchButton" onClick={this.searchRecipe}>
+        <button className="searchValue--Button" onClick={this.searchRecipe}>
           Search
         </button>
         <NewRecipe

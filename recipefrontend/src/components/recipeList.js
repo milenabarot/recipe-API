@@ -23,6 +23,7 @@ function RecipeList(props) {
             ></input>
             <button
               id={recipe.id}
+              className="recipeList--item-updateButton"
               onClick={(event) => props.getUpdatedRecipeList(event, recipe.id)}
             >
               Update Title
@@ -31,13 +32,16 @@ function RecipeList(props) {
             <img
               src={recipe.image}
               alt={recipe.title}
-              className="recipeList--image"
+              className="recipeList--item-image"
             ></img>
             <a href={recipe.url} target="_blank" rel="noreferrer">
               Link to recipe
             </a>
             <p>Date added: {new Date(recipe.dateAdded).toDateString()}</p>
-            <button onClick={() => props.deleteRecipe(recipe.id)}>
+            <button
+              onClick={() => props.deleteRecipe(recipe.id)}
+              className="recipeList--item-deleteButton"
+            >
               Delete
             </button>
           </li>
