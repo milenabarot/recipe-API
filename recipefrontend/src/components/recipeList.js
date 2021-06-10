@@ -34,7 +34,12 @@ function RecipeList(props) {
               alt={recipe.title}
               className="recipeList--item-image"
             ></img>
-            <a href={recipe.url} target="_blank" rel="noreferrer">
+            <a
+              href={recipe.url}
+              target="_blank"
+              rel="noreferrer"
+              className="recipeList--item-link"
+            >
               Link to recipe
             </a>
             <p>Date added: {new Date(recipe.dateAdded).toDateString()}</p>
@@ -42,7 +47,7 @@ function RecipeList(props) {
               onClick={() => props.deleteRecipe(recipe.id)}
               className="recipeList--item-deleteButton"
             >
-              Delete
+              Delete Recipe
             </button>
           </li>
         );

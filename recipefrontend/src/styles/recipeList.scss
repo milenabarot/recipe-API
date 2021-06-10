@@ -1,3 +1,5 @@
+@use "_variables.scss" as *;
+
 .recipeList {
   list-style: none;
   display: flex;
@@ -9,10 +11,9 @@
     align-items: center;
     flex-direction: column;
     margin: 40px;
-    border: 2px solid darkgray;
-    border-radius: 5px;
+    border-radius: 14% 24% 0%;
     padding: 10px 65px;
-    background-color: lightyellow;
+    background-color: $dusty-green;
 
     &-updateButton {
       background-color: transparent;
@@ -40,11 +41,17 @@
 
     &-image {
       width: 300px;
+      border-radius: 90px;
+    }
+
+    &-link {
+      font-size: 15px;
     }
 
     input[type="text"] {
       border: none;
-      border-bottom: 2px solid white;
+      background-color: transparent;
+      border: 2px solid white;
       border-radius: 5px;
       padding: 10px;
       outline: none;

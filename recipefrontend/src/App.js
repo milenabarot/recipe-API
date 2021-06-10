@@ -1,9 +1,10 @@
 import React from "react";
-import "../src/styles/App.scss";
+import "./App.scss";
 import createReactClass from "create-react-class";
 import axios from "axios";
 import NewRecipe from "./components/newRecipe";
 import RecipeList from "./components/recipeList";
+import SearchRecipe from "./components/searchRecipe";
 
 const App = createReactClass({
   getInitialState() {
@@ -32,6 +33,13 @@ const App = createReactClass({
         ...this.state.newRecipe,
         [event.target.name]: event.target.value,
       },
+    });
+  },
+
+  //updates value of search input field
+  updateSearchValueInput(event) {
+    this.setState({
+      searchValue: event.target.value,
     });
   },
 
@@ -207,19 +215,13 @@ const App = createReactClass({
     return (
       <div className="App">
         <h1>Recipe App</h1>
-        <input
-          type="text"
-          className="searchValue"
-          value={this.state.searchValue}
-          onInput={(event) => {
-            this.setState({ searchValue: event.target.value });
-          }}
-          onKeyDown={this.onEnterSearchRecipe}
-          ref={this.searchBarRef}
+        <SearchRecipe
+          searchValue={this.state.searchValue}
+          updateSearchValueInput={this.updateSearchValueInput}
+          onEnterSearchRecipe={this.onEnterSearchRecipe}
+          searchBarRef={this.searchBarRef}
+          SearchRecipe={this.searchRecipe}
         />
-        <button className="searchValue--Button" onClick={this.searchRecipe}>
-          Search
-        </button>
         <NewRecipe
           newRecipeOnSubmit={this.newRecipeOnSubmit}
           newRecipe={this.state.newRecipe}

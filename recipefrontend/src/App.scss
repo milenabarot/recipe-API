@@ -1,12 +1,15 @@
+@use "./styles/_variables.scss" as *;
+
 body {
-  background-color: cornsilk;
+  background-color: $pale-cream;
 }
 
 .App {
   text-align: center;
   margin: 20px;
-  font-family: "Dosis", sans-serif;
+  font-family: $main-font-family;
   font-size: 20px;
+  color: $main-font-color;
   h1 {
     font-family: "Odibee Sans", cursive;
     font-size: 75px;
