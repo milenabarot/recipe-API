@@ -1,0 +1,57 @@
+@use "_variables.scss" as *;
+
+.searchRecipe {
+  margin-top: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--inputWrap {
+    padding: 2px;
+    outline: none;
+    font-size: 15px;
+    box-shadow: -4px 7px 3px -4px lightgray;
+    width: 26%;
+    height: 92%;
+    border-radius: unset;
+    border-top-left-radius: 1000px;
+    border-bottom-left-radius: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 72px;
+    border: thin solid rgba(0, 0, 0, 0.2);
+    border-radius: 1000px;
+  }
+
+  input[type="text"] {
+    border: 2px solid $light-yellow;
+    background-color: transparent;
+    padding-left: 20px;
+    outline: none;
+    font-size: 15px;
+    width: 100%;
+    height: 92%;
+    border-radius: unset;
+    border: unset;
+    border-top-left-radius: 1000px;
+    border-bottom-left-radius: 1000px;
+  }
+  &--button {
+    background-color: transparent;
+    border: 1px solid #e6b022;
+    cursor: pointer;
+    color: black;
+    padding: 0 38px;
+    border-radius: 1000px;
+    border-bottom-left-radius: unset;
+    border-top-left-radius: unset;
+    font-size: 15px;
+    transition: 0.3s ease-in-out;
+    height: 92%;
+
+    &:hover {
+      color: black;
+    }
+  }
+}

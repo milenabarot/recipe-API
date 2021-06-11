@@ -1,17 +1,22 @@
+import "../styles/searchRecipe.scss";
+
 function SearchRecipe(props) {
   return (
-    <div>
-      <input
-        type="text"
-        className="searchValue"
-        value={props.searchValue}
-        onInput={props.updateSearchValueInput}
-        onKeyDown={props.onEnterSearchRecipe}
-        ref={props.searchBarRef}
-      />
-      <button className="searchValue--Button" onClick={props.searchRecipe}>
-        Search
-      </button>
+    <div className="searchRecipe">
+      <div className="searchRecipe--inputWrap">
+        <input
+          type="text"
+          className="searchRecipe--input"
+          value={props.searchValue}
+          onInput={props.updateSearchValueInput}
+          onKeyDown={props.onEnterSearchRecipe}
+          ref={props.searchBarRef}
+          placeholder="Find a Recipe..."
+        />
+        <button className="searchRecipe--button" onClick={props.searchRecipe}>
+          Search
+        </button>
+      </div>
     </div>
   );
 }
