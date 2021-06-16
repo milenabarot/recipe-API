@@ -52,6 +52,10 @@ function RecipeList(props) {
           </li>
         );
       })}
+      {!sortedRecipeList.length && props.searchValue && (
+        <p>No results for {props.searchValue}</p>
+      )}
+      {!sortedRecipeList.length && <p>How about adding some recipes...</p>}
     </ul>
   );
 }

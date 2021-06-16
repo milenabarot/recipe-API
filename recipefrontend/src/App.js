@@ -22,8 +22,8 @@ const App = createReactClass({
   },
 
   componentDidMount() {
-    this.searchBarRef.current.focus();
     this.getRecipeListData();
+    this.searchBarRef.current.focus();
   },
 
   //monitors change of all input fields when adding a new recipe
@@ -233,6 +233,7 @@ const App = createReactClass({
           changeOfRecipeTitle={this.changeOfRecipeTitle}
           getUpdatedRecipeList={this.getUpdatedRecipeList}
           onEnterGetUpdatedRecipeList={this.onEnterGetUpdatedRecipeList}
+          searchValue={this.state.searchValue}
         />
       </div>
     );
