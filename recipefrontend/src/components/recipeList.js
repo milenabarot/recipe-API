@@ -55,7 +55,9 @@ function RecipeList(props) {
       {!sortedRecipeList.length && props.searchValue && (
         <p>No results for {props.searchValue}</p>
       )}
-      {!sortedRecipeList.length && <p>How about adding some recipes...</p>}
+      {!sortedRecipeList.length &&
+        !props.isRecipeListLoading &&
+        !props.searchValue && <p>How about adding some recipes...</p>}
     </ul>
   );
 }

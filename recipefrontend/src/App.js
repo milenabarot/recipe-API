@@ -12,6 +12,7 @@ const App = createReactClass({
     return {
       searchValue: "",
       recipeList: [],
+      isRecipeListLoading: true,
       newRecipe: {
         title: "",
         description: "",
@@ -113,6 +114,7 @@ const App = createReactClass({
         });
         this.setState({
           recipeList: recipes,
+          isRecipeListLoading: false,
         });
         console.log(this.state.recipeList);
       })
@@ -234,6 +236,7 @@ const App = createReactClass({
           getUpdatedRecipeList={this.getUpdatedRecipeList}
           onEnterGetUpdatedRecipeList={this.onEnterGetUpdatedRecipeList}
           searchValue={this.state.searchValue}
+          isRecipeListLoading={this.state.isRecipeListLoading}
         />
       </div>
     );
