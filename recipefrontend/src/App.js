@@ -5,6 +5,7 @@ import axios from "axios";
 import NewRecipe from "./components/newRecipe";
 import RecipeList from "./components/recipeList";
 import SearchRecipe from "./components/searchRecipe";
+import Header from "./components/header";
 
 const App = createReactClass({
   getInitialState() {
@@ -216,7 +217,7 @@ const App = createReactClass({
   render() {
     return (
       <div className="App">
-        <h1>Recipe App</h1>
+        <Header />
         <SearchRecipe
           searchValue={this.state.searchValue}
           updateSearchValueInput={this.updateSearchValueInput}

@@ -1,0 +1,32 @@
+@use "_variables.scss" as *;
+
+h1 {
+  font-family: "Odibee Sans", cursive;
+  font-size: 75px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.header-confettiButton {
+  margin-left: 1%;
+  margin-top: 1%;
+  outline: none;
+  border: 2px solid $mid-gray;
+  background-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  position: fixed;
+  margin-top: -38px;
+  font-size: 15px;
+  transition: 0.5s ease-in-out;
+
+  &:hover {
+    background-color: $mid-yellow;
+    border: 2px solid $mid-yellow;
+    transform: translateX(20%);
+  }
+
+  p {
+    margin: 5px 2px;
+  }
+}
