@@ -18,14 +18,15 @@ const Header = createReactClass({
   render() {
     const width = document.documentElement.scrollWidth;
     const height = document.documentElement.scrollHeight;
+    const { isConfettiShowing } = this.state;
 
     return (
       <div className="header">
         <button className="header-confettiButton" onClick={this.toggleConfetti}>
-          {this.state.isConfettiShowing ? <p>Turn me off</p> : <p>Click me!</p>}
+          {isConfettiShowing ? <p>Turn me off</p> : <p>Click me!</p>}
         </button>
         <h1>Recipe App</h1>
-        {this.state.isConfettiShowing && (
+        {isConfettiShowing && (
           <Confetti
             width={width}
             height={height}
