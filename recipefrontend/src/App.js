@@ -45,6 +45,41 @@ const App = createReactClass({
     });
   },
 
+  // get recipes data
+  getRecipeListData() {
+    axios
+      .get("http://localhost:3000/recipes")
+      .then((response) => {
+        console.log(response);
+
+        const recipes = response.data.map((recipeData) => {
+          const title = recipeData.title;
+          const description = recipeData.description;
+          const image = recipeData.image;
+          const url = recipeData.url;
+          const dateAdded = recipeData.dateAdded;
+          const id = recipeData._id;
+
+          return {
+            title: title,
+            description: description,
+            image: image,
+            url: url,
+            dateAdded: dateAdded,
+            id: id,
+          };
+        });
+        this.setState({
+          recipeList: recipes,
+          isRecipeListLoading: false,
+        });
+        console.log(this.state.recipeList);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
+
   // updating recipe title, updating state
   changeOfRecipeTitle(event) {
     const updatedRecipeListRecipeTitle = event.target.value;
@@ -87,41 +122,6 @@ const App = createReactClass({
     if (event.key === "Enter") {
       this.getUpdatedRecipeList(event, id);
     }
-  },
-
-  // get recipes data
-  getRecipeListData() {
-    axios
-      .get("http://localhost:3000/recipes")
-      .then((response) => {
-        console.log(response);
-
-        const recipes = response.data.map((recipeData) => {
-          const title = recipeData.title;
-          const description = recipeData.description;
-          const image = recipeData.image;
-          const url = recipeData.url;
-          const dateAdded = recipeData.dateAdded;
-          const id = recipeData._id;
-
-          return {
-            title: title,
-            description: description,
-            image: image,
-            url: url,
-            dateAdded: dateAdded,
-            id: id,
-          };
-        });
-        this.setState({
-          recipeList: recipes,
-          isRecipeListLoading: false,
-        });
-        console.log(this.state.recipeList);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   },
 
   //add new recipe

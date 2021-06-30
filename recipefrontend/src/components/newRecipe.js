@@ -24,6 +24,13 @@ const NewRecipe = createReactClass({
     });
   },
 
+  onSubmitRecipe(event) {
+    this.props.newRecipeOnSubmit(event);
+    this.setState({
+      isModalOpen: false,
+    });
+  },
+
   render() {
     const { props, openModal, closeModal } = this;
     const { isModalOpen } = this.state;
@@ -53,10 +60,7 @@ const NewRecipe = createReactClass({
                 >
                   X
                 </button>
-                <form
-                  className="newRecipe-form"
-                  onSubmit={props.newRecipeOnSubmit}
-                >
+                <form className="newRecipe-form" onSubmit={this.onSubmitRecipe}>
                   <label htmlFor="title"></label>
                   <input
                     type="text"
