@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 //search query get request by title of recipe, partial search
+// i for case sensitive matching
 
 router.get("/search/:title", async (req, res) => {
   let regex = new RegExp(req.params.title, "i");
@@ -27,12 +28,13 @@ router.get("/search/:title", async (req, res) => {
 });
 
 //Submits a post
+// checks to see if the image is an empty string
 router.post("/", async (req, res) => {
   const recipe = new Recipe({
     title: req.body.title,
     description: req.body.description,
     url: req.body.url,
-    image: req.body.image,
+    image: req.body.image.length ? req.body.image : undefined,
   });
 
   try {
@@ -44,6 +46,7 @@ router.post("/", async (req, res) => {
 });
 
 //Gets back a specific post
+
 router.get("/:recipeId", async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.recipeId);
@@ -72,7 +75,6 @@ router.patch("/:recipeId", async (req, res) => {
       { new: true }
     );
     res.json(updatedRecipe);
-    console.log(updatedRecipe);
   } catch (err) {
     res.json({ message: err });
   }
