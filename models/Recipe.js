@@ -17,6 +17,7 @@ const RecipeSchema = mongoose.Schema({
   },
   image: {
     type: String,
+    default: "https://image.flaticon.com/icons/png/512/2917/2917630.png",
   },
   dateAdded: {
     type: Date,

@@ -32,7 +32,7 @@ const NewRecipe = createReactClass({
   },
 
   render() {
-    const { props, openModal, closeModal } = this;
+    const { props, openModal, closeModal, onSubmitRecipe } = this;
     const { isModalOpen } = this.state;
 
     return (
@@ -60,7 +60,7 @@ const NewRecipe = createReactClass({
                 >
                   X
                 </button>
-                <form className="newRecipe-form" onSubmit={this.onSubmitRecipe}>
+                <form className="newRecipe-form" onSubmit={onSubmitRecipe}>
                   <label htmlFor="title"></label>
                   <input
                     type="text"
@@ -88,7 +88,6 @@ const NewRecipe = createReactClass({
                     name="image"
                     value={props.newRecipe.image}
                     placeholder="Image url"
-                    required
                     onChange={props.newRecipeInputChange}
                   />
                   <label htmlFor="link"></label>

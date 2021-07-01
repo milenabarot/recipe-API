@@ -45,13 +45,22 @@ const App = createReactClass({
     });
   },
 
+  //if searchValue is equal to an empty string
+  //then update recipeList with the full data to display all recipes, so p tag doesn't show
+  showRecipeListOnEmptySearchValue() {
+    if (this.state.searchValue === "") {
+      this.setState({
+        isRecipeListLoading: true,
+      });
+      this.getRecipeListData();
+    }
+  },
+
   // get recipes data
   getRecipeListData() {
     axios
       .get("http://localhost:3000/recipes")
       .then((response) => {
-        console.log(response);
-
         const recipes = response.data.map((recipeData) => {
           const title = recipeData.title;
           const description = recipeData.description;
@@ -73,7 +82,6 @@ const App = createReactClass({
           recipeList: recipes,
           isRecipeListLoading: false,
         });
-        console.log(this.state.recipeList);
       })
       .catch((error) => {
         console.error(error);
@@ -92,7 +100,6 @@ const App = createReactClass({
       ...updatedRecipeList[index],
       title: updatedRecipeListRecipeTitle,
     };
-    console.log(updatedRecipeList[index]);
 
     this.setState({
       recipeList: updatedRecipeList,
@@ -127,10 +134,10 @@ const App = createReactClass({
   //add new recipe
   newRecipeOnSubmit(event) {
     event.preventDefault();
+
     axios
       .post("http://localhost:3000/recipes", this.state.newRecipe)
       .then((response) => {
-        console.log(response);
         const updatedRecipeWithNewId = {
           title: response.data.title,
           description: response.data.description,
@@ -141,7 +148,7 @@ const App = createReactClass({
         };
         let { recipeList } = this.state;
         recipeList.push(updatedRecipeWithNewId);
-        console.log(response.data);
+
         this.setState({
           recipeList,
           newRecipe: {
@@ -152,7 +159,6 @@ const App = createReactClass({
             dateAdded: new Date(),
           },
         });
-        console.log(this.state.recipeList, this.state.newRecipe);
       })
       .catch((error) => {
         console.error(error);
@@ -174,8 +180,6 @@ const App = createReactClass({
       axios
         .get("http://localhost:3000/recipes/search/" + this.state.searchValue)
         .then((response) => {
-          console.log(response.data);
-
           const searchRecipeListResults = response.data.map(
             (searchRecipeData) => {
               const title = searchRecipeData.title;
@@ -223,7 +227,10 @@ const App = createReactClass({
           updateSearchValueInput={this.updateSearchValueInput}
           onEnterSearchRecipe={this.onEnterSearchRecipe}
           searchBarRef={this.searchBarRef}
-          SearchRecipe={this.searchRecipe}
+          searchRecipe={this.searchRecipe}
+          showRecipeListOnEmptySearchValue={
+            this.showRecipeListOnEmptySearchValue
+          }
         />
         <NewRecipe
           newRecipeOnSubmit={this.newRecipeOnSubmit}
