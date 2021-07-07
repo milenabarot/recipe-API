@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 //search query get request by title of recipe, partial search
-// i for case sensitive matching
+// i for case insensitive matching
 
 router.get("/search/:title", async (req, res) => {
   let regex = new RegExp(req.params.title, "i");
@@ -28,7 +28,8 @@ router.get("/search/:title", async (req, res) => {
 });
 
 //Submits a post
-// checks to see if the image is an empty string
+// check to see if the image an empty string
+// if it is an empty string, it is set to undefined so it picks up the default image
 router.post("/", async (req, res) => {
   const recipe = new Recipe({
     title: req.body.title,
@@ -46,7 +47,7 @@ router.post("/", async (req, res) => {
 });
 
 //Gets back a specific post
-
+//this get request by ID isn't used in the front end
 router.get("/:recipeId", async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.recipeId);
