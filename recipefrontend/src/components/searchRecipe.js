@@ -9,8 +9,7 @@ function SearchRecipe(props) {
           className="searchRecipe--input"
           value={props.searchValue}
           onInput={props.updateSearchValueInput}
-          onKeyDown={props.onEnterSearchRecipe}
-          onKeyUp={props.showRecipeListOnEmptySearchValue}
+          onKeyUp={props.onKeyUpSearchRecipeInput}
           ref={props.searchBarRef}
           placeholder="Find a Recipe..."
         />

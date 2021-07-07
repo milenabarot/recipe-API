@@ -45,14 +45,17 @@ const App = createReactClass({
     });
   },
 
-  //if searchValue is equal to an empty string
+  //show recipe list on empty search value -if searchValue is equal to an empty string
   //then update recipeList with the full data to display all recipes, so p tag doesn't show
-  showRecipeListOnEmptySearchValue() {
+  //also checks to see if Enter key has been pressed to search recipes
+  onKeyUpSearchRecipeInput(event) {
     if (this.state.searchValue === "") {
       this.setState({
         isRecipeListLoading: true,
       });
       this.getRecipeListData();
+    } else if (event.key === "Enter") {
+      this.searchRecipe();
     }
   },
 
@@ -106,8 +109,8 @@ const App = createReactClass({
     });
   },
 
-  //once recipeTitle has been updated, and Enter button clicked
-  // patch request will be made to update database
+  //once recipeTitle has been updated
+  //patch request will be made to update database
   getUpdatedRecipeList(event, id) {
     const { recipeList } = this.state;
     const index = recipeList.findIndex((recipe) => {
@@ -211,13 +214,6 @@ const App = createReactClass({
     }
   },
 
-  //search for recipe on enter key
-  onEnterSearchRecipe(event) {
-    if (event.key === "Enter") {
-      this.searchRecipe();
-    }
-  },
-
   render() {
     return (
       <div className="App">
@@ -225,12 +221,9 @@ const App = createReactClass({
         <SearchRecipe
           searchValue={this.state.searchValue}
           updateSearchValueInput={this.updateSearchValueInput}
-          onEnterSearchRecipe={this.onEnterSearchRecipe}
           searchBarRef={this.searchBarRef}
           searchRecipe={this.searchRecipe}
-          showRecipeListOnEmptySearchValue={
-            this.showRecipeListOnEmptySearchValue
-          }
+          onKeyUpSearchRecipeInput={this.onKeyUpSearchRecipeInput}
         />
         <NewRecipe
           newRecipeOnSubmit={this.newRecipeOnSubmit}
