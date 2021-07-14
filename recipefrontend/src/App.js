@@ -135,8 +135,10 @@ const App = createReactClass({
   },
 
   //add new recipe
+  //make a copy of recipeList first to then push newRecipe onto
   newRecipeOnSubmit(event) {
     event.preventDefault();
+    let recipeListWithANewRecipe = [...this.state.recipeList];
 
     axios
       .post("http://localhost:3000/recipes", this.state.newRecipe)
@@ -149,11 +151,10 @@ const App = createReactClass({
           dateAdded: response.data.dateAdded,
           id: response.data._id,
         };
-        let { recipeList } = this.state;
-        recipeList.push(updatedRecipeWithNewId);
+        recipeListWithANewRecipe.push(updatedRecipeWithNewId);
 
         this.setState({
-          recipeList,
+          recipeList: recipeListWithANewRecipe,
           newRecipe: {
             title: "",
             description: "",
@@ -176,12 +177,17 @@ const App = createReactClass({
   },
 
   //search for recipe
+  //using query params with axios for the search query
+  // instead of passing through the state
 
   searchRecipe() {
     const searchValue = this.state.searchValue;
+    const params = {
+      searchValue: searchValue,
+    };
     if (searchValue !== "") {
       axios
-        .get("http://localhost:3000/recipes/search/" + this.state.searchValue)
+        .get("http://localhost:3000/recipes/search", { params })
         .then((response) => {
           const searchRecipeListResults = response.data.map(
             (searchRecipeData) => {

@@ -1,3 +1,4 @@
+const { request } = require("express");
 const express = require("express");
 const router = express.Router();
 const Recipe = require("../models/Recipe");
@@ -12,11 +13,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-//search query get request by title of recipe, partial search
-// i for case insensitive matching
+//search query get request using Query params with axios
+// instead of passing through the state and requesting the title
+// partial search using RegExp. i for case insensitive matching
+// example: http://localhost:3000/recipes/search?searchValue=lasagne
 
-router.get("/search/:title", async (req, res) => {
-  let regex = new RegExp(req.params.title, "i");
+router.get("/search", async (req, res) => {
+  let regex = new RegExp(req.query.searchValue, "i");
+
   try {
     const recipe = await Recipe.find({
       title: { $regex: regex },
@@ -26,6 +30,19 @@ router.get("/search/:title", async (req, res) => {
     res.json({ message: err });
   }
 });
+
+// code before for search query which used the state which passed through
+// router.get("/search/:title", async (req, res) => {
+//   let regex = new RegExp(req.params.title, "i");
+//   try {
+//     const recipe = await Recipe.find({
+//       title: { $regex: regex },
+//     });
+//     res.json(recipe);
+//   } catch (err) {
+//     res.json({ message: err });
+//   }
+// });
 
 //Submits a post
 // check to see if the image an empty string
