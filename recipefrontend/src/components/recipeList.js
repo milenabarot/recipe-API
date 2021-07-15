@@ -28,7 +28,23 @@ function RecipeList(props) {
             >
               Update Title
             </button>
-            <p>{recipe.description}</p>
+            <input
+              type="text"
+              id={recipe.id}
+              name="recipeDescription"
+              value={recipe.description}
+              required
+              onInput={props.changeOfRecipeDescription}
+            ></input>
+            <button
+              id={recipe.id}
+              className="recipeList--item-updateButton"
+              onClick={(event) => {
+                props.getUpdatedRecipeListWithNewDescription(event, recipe.id);
+              }}
+            >
+              Update Description
+            </button>
             <img
               src={recipe.image}
               alt={recipe.title}

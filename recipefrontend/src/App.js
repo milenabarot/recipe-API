@@ -134,6 +134,46 @@ const App = createReactClass({
     }
   },
 
+  //updating recipe description, and update state
+  changeOfRecipeDescription(event) {
+    const updatedRecipeDescription = event.target.value;
+
+    let updatedRecipeList = [...this.state.recipeList];
+
+    const index = updatedRecipeList.findIndex((recipe) => {
+      return recipe.id === event.target.id;
+    });
+    updatedRecipeList[index] = {
+      ...updatedRecipeList[index],
+      description: updatedRecipeDescription,
+    };
+    this.setState({
+      recipeList: updatedRecipeList,
+    });
+  },
+
+  //once recipe description has been updated
+  //patch request to update database
+
+  getUpdatedRecipeListWithNewDescription(event, id) {
+    const { recipeList } = this.state;
+    const index = recipeList.findIndex((recipe) => {
+      return recipe.id === event.target.id;
+    });
+    const updatedDescription = recipeList[index].description;
+
+    axios
+      .patch("http://localhost:3000/recipes/" + id, {
+        description: updatedDescription,
+      })
+      .then(() => {
+        this.getRecipeListData();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
+
   //add new recipe
   //make a copy of recipeList first to then push newRecipe onto
   newRecipeOnSubmit(event) {
@@ -244,6 +284,10 @@ const App = createReactClass({
           onEnterGetUpdatedRecipeList={this.onEnterGetUpdatedRecipeList}
           searchValue={this.state.searchValue}
           isRecipeListLoading={this.state.isRecipeListLoading}
+          changeOfRecipeDescription={this.changeOfRecipeDescription}
+          getUpdatedRecipeListWithNewDescription={
+            this.getUpdatedRecipeListWithNewDescription
+          }
         />
       </div>
     );
