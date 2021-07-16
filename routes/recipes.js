@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 //search query get request using Query params with axios
 // instead of passing through the state and requesting the title
 // partial search using RegExp. i for case insensitive matching
-// example: http://localhost:3000/recipes/search?searchValue=lasagne
+//http://localhost:3000/recipes/search?searchValue=lasagne
 
 router.get("/search", async (req, res) => {
   let regex = new RegExp(req.query.searchValue, "i");
@@ -85,12 +85,21 @@ router.delete("/:recipeId", async (req, res) => {
 });
 
 //Update a post
+//added in ability to be able to update description
+//omitUndefinded was added to enable both title & description to be updated
+
 router.patch("/:recipeId", async (req, res) => {
   try {
-    const updatedRecipe = await Recipe.findOneAndUpdate(
+    const updatedRecipe = await Recipe.findByIdAndUpdate(
       { _id: req.params.recipeId },
-      { title: req.body.title },
-      { new: true }
+      {
+        title: req.body.title,
+        description: req.body.description,
+      },
+      {
+        new: true,
+        omitUndefined: true,
+      }
     );
     res.json(updatedRecipe);
   } catch (err) {
