@@ -23,7 +23,7 @@ function RecipeList(props) {
             ></input>
             <button
               id={recipe.id}
-              className="recipeList--item-updateButton"
+              className="recipeList--item-updateTitleButton"
               onClick={(event) => props.getUpdatedRecipeList(event, recipe.id)}
             >
               Update Title
@@ -38,7 +38,7 @@ function RecipeList(props) {
             ></input>
             <button
               id={recipe.id}
-              className="recipeList--item-updateButton"
+              className="recipeList--item-updateDescriptionButton"
               onClick={(event) => {
                 props.getUpdatedRecipeListWithNewDescription(event, recipe.id);
               }}

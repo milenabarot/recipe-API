@@ -85,12 +85,21 @@ router.delete("/:recipeId", async (req, res) => {
 });
 
 //Update a post
+//added in ability to be able to update description
+//omitUndefinded was added to enable both title & description to be updated
+
 router.patch("/:recipeId", async (req, res) => {
   try {
-    const updatedRecipe = await Recipe.findOneAndUpdate(
+    const updatedRecipe = await Recipe.findByIdAndUpdate(
       { _id: req.params.recipeId },
-      { title: req.body.title },
-      { new: true }
+      {
+        title: req.body.title,
+        description: req.body.description,
+      },
+      {
+        new: true,
+        omitUndefined: true,
+      }
     );
     res.json(updatedRecipe);
   } catch (err) {

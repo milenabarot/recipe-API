@@ -15,7 +15,7 @@
     padding: 10px 65px;
     background-color: $dusty-green;
 
-    &-updateButton {
+    &-updateTitleButton {
       background-color: transparent;
       border: 2px solid lightgrey;
       cursor: pointer;
@@ -27,6 +27,21 @@
       margin-top: 5px;
       font-family: $main-font-family;
       color: $main-font-color;
+    }
+
+    &-updateDescriptionButton {
+      background-color: transparent;
+      border: 2px solid lightgrey;
+      cursor: pointer;
+      color: black;
+      padding: 3px;
+      border-radius: 5px;
+      font-size: 10px;
+      transition: 0.3s ease-in-out;
+      margin-top: 5px;
+      font-family: $main-font-family;
+      color: $main-font-color;
+      margin-bottom: 7px;
     }
 
     &-deleteButton {
@@ -52,13 +67,11 @@
       font-size: 15px;
     }
 
-    input[type="text"] {
-      border: none;
+    input[name="recipeTitle"] {
       background-color: transparent;
       border: 2px solid white;
       border-radius: 5px;
       padding: 8px;
-      outline: none;
       margin: 5px;
       width: 250px;
       text-align: center;
@@ -66,6 +79,21 @@
       color: $main-font-color;
       font-size: 22px;
       font-weight: bold;
+    }
+    input[name="recipeDescription"] {
+      background-color: transparent;
+      border: 2px solid white;
+      padding: 4px;
+      margin: 5px;
+      width: 250px;
+      text-align: center;
+      font-family: $main-font-family;
+      color: $main-font-color;
+      font-size: 20px;
+      font-weight: initial;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
