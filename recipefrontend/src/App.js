@@ -111,10 +111,10 @@ const App = createReactClass({
 
   //once recipeTitle has been updated
   //patch request will be made to update database
-  getUpdatedRecipeList(event, id) {
+  getUpdatedRecipeList(id) {
     const { recipeList } = this.state;
     const index = recipeList.findIndex((recipe) => {
-      return recipe.id === event.target.id;
+      return recipe.id === id;
     });
     const updatedTitle = recipeList[index].title;
 
@@ -130,7 +130,7 @@ const App = createReactClass({
 
   onEnterGetUpdatedRecipeList(event, id) {
     if (event.key === "Enter") {
-      this.getUpdatedRecipeList(event, id);
+      this.getUpdatedRecipeList(id);
     }
   },
 
@@ -155,10 +155,10 @@ const App = createReactClass({
   //once recipe description has been updated
   //patch request to update database
 
-  getUpdatedRecipeListWithNewDescription(event, id) {
+  getUpdatedRecipeListWithNewDescription(id) {
     const { recipeList } = this.state;
     const index = recipeList.findIndex((recipe) => {
-      return recipe.id === event.target.id;
+      return recipe.id === id;
     });
     const updatedDescription = recipeList[index].description;
 

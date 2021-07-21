@@ -1,5 +1,6 @@
 import "../styles/recipeList.scss";
 import _ from "lodash";
+import { ChevronRight, TrashCan } from "akar-icons";
 
 function RecipeList(props) {
   const sortedRecipeList = _.orderBy(props.recipeList, ["dateAdded"], ["desc"]);
@@ -9,42 +10,48 @@ function RecipeList(props) {
       {sortedRecipeList.map((recipe, index) => {
         return (
           <li key={index} className="recipeList--item">
-            <label htmlFor="recipeTitle"></label>
-            <input
-              type="text"
-              id={recipe.id}
-              name="recipeTitle"
-              value={recipe.title}
-              required
-              onInput={props.changeOfRecipeTitle}
-              onKeyDown={(event, id) =>
-                props.onEnterGetUpdatedRecipeList(event, recipe.id)
-              }
-            ></input>
-            <button
-              id={recipe.id}
-              className="recipeList--item-updateTitleButton"
-              onClick={(event) => props.getUpdatedRecipeList(event, recipe.id)}
-            >
-              Update Title
-            </button>
-            <input
-              type="text"
-              id={recipe.id}
-              name="recipeDescription"
-              value={recipe.description}
-              required
-              onInput={props.changeOfRecipeDescription}
-            ></input>
-            <button
-              id={recipe.id}
-              className="recipeList--item-updateDescriptionButton"
-              onClick={(event) => {
-                props.getUpdatedRecipeListWithNewDescription(event, recipe.id);
-              }}
-            >
-              Update Description
-            </button>
+            <div className="recipeList--item-titleWrap">
+              <label htmlFor="recipeTitle"></label>
+              <input
+                type="text"
+                id={recipe.id}
+                name="recipeTitle"
+                value={recipe.title}
+                required
+                onInput={props.changeOfRecipeTitle}
+                onKeyDown={(event, id) =>
+                  props.onEnterGetUpdatedRecipeList(event, recipe.id)
+                }
+              ></input>
+
+              <button
+                id={recipe.id}
+                className="recipeList--item-updateTextButton"
+                onClick={() => props.getUpdatedRecipeList(recipe.id)}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+            <div className="recipeList--item-descriptionWrap">
+              <input
+                type="text"
+                id={recipe.id}
+                name="recipeDescription"
+                value={recipe.description}
+                required
+                onInput={props.changeOfRecipeDescription}
+              ></input>
+              <button
+                id={recipe.id}
+                className="recipeList--item-updateTextButton"
+                onClick={() => {
+                  props.getUpdatedRecipeListWithNewDescription(recipe.id);
+                }}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+
             <img
               src={recipe.image}
               alt={recipe.title}
@@ -56,14 +63,14 @@ function RecipeList(props) {
               rel="noreferrer"
               className="recipeList--item-link"
             >
-              Link to recipe
+              Link
             </a>
-            <p>Date added: {new Date(recipe.dateAdded).toDateString()}</p>
+            <p>Added on: {new Date(recipe.dateAdded).toDateString()}</p>
             <button
               onClick={() => props.deleteRecipe(recipe.id)}
               className="recipeList--item-deleteButton"
             >
-              Delete Recipe
+              <TrashCan size={20} />
             </button>
           </li>
         );

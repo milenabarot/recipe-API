@@ -60,17 +60,23 @@
     border: 2px solid lightgrey;
     cursor: pointer;
     color: black;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 15px;
+    padding: 0px 7px;
+    border-radius: 1000px;
+    font-size: 17px;
     transition: 0.3s ease-in-out;
     font-family: $main-font-family;
     color: $main-font-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       color: black;
       background-color: $mid-yellow;
       border: 2px solid mid-yellow;
+    }
+    p {
+      padding: 0px 11px 0px 5px;
     }
   }
 
