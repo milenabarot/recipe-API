@@ -3,8 +3,11 @@
 .recipeList {
   list-style: none;
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
   margin-top: 50px;
   &--item {
     display: flex;
@@ -15,38 +18,42 @@
     padding: 10px 65px;
     background-color: $dusty-green;
 
-    &-updateTitleButton {
-      background-color: transparent;
-      border: 2px solid lightgrey;
-      cursor: pointer;
-      color: black;
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 15px;
-      transition: 0.3s ease-in-out;
-      margin-top: 5px;
-      font-family: $main-font-family;
-      color: $main-font-color;
+    &-titleWrap {
+      margin: 25px 13px 13px 13px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    &-updateDescriptionButton {
+    &-descriptionWrap {
+      margin: 13px 13px 20px 13px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-updateTextButton {
       background-color: transparent;
-      border: 2px solid lightgrey;
+      border: 2px solid transparent;
       cursor: pointer;
       color: black;
       padding: 3px;
       border-radius: 5px;
       font-size: 10px;
       transition: 0.3s ease-in-out;
-      margin-top: 5px;
+      margin: 5px 5px 7px 12px;
       font-family: $main-font-family;
       color: $main-font-color;
-      margin-bottom: 7px;
+
+      &:hover {
+        background-color: $mid-yellow;
+        border: 2px solid lightgrey;
+      }
     }
 
     &-deleteButton {
       background-color: transparent;
-      border: 2px solid lightgrey;
+      border: 2px solid transparent;
       cursor: pointer;
       color: black;
       padding: 5px;
@@ -56,41 +63,35 @@
       margin-top: 5px;
       font-family: $main-font-family;
       color: $main-font-color;
+
+      &:hover {
+        background-color: $mid-yellow;
+        border: 2px solid lightgrey;
+      }
     }
 
     &-image {
       width: 300px;
-      border-radius: 90px;
+      padding: 25px 0px;
     }
 
     &-link {
       font-size: 15px;
     }
-
-    input[name="recipeTitle"] {
-      background-color: transparent;
-      border: 2px solid white;
-      border-radius: 5px;
-      padding: 8px;
-      margin: 5px;
-      width: 250px;
-      text-align: center;
-      font-family: $main-font-family;
-      color: $main-font-color;
-      font-size: 22px;
-      font-weight: bold;
+    p {
+      font-size: 15px;
     }
-    input[name="recipeDescription"] {
+
+    input[type="text"] {
       background-color: transparent;
-      border: 2px solid white;
+      border: transparent;
+      border-bottom: 2px solid white;
       padding: 4px;
       margin: 5px;
-      width: 250px;
-      text-align: center;
+      width: 230px;
       font-family: $main-font-family;
       color: $main-font-color;
-      font-size: 20px;
-      font-weight: initial;
+      font-size: 25px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

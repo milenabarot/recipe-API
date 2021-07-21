@@ -2,6 +2,7 @@ import "../styles/newRecipe.scss";
 import Modal from "react-modal";
 import createReactClass from "create-react-class";
 import { motion, AnimatePresence } from "framer-motion";
+import { CirclePlusFill } from "akar-icons";
 
 Modal.setAppElement("#root");
 
@@ -38,7 +39,8 @@ const NewRecipe = createReactClass({
     return (
       <div className="newRecipe">
         <button className="newRecipe-addButton" onClick={openModal}>
-          Add a new Recipe
+          <p>New Recipe</p>
+          <CirclePlusFill size={25} style={{ display: "inline" }} />
         </button>
         <AnimatePresence>
           {isModalOpen && (
