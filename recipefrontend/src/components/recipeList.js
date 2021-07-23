@@ -15,41 +15,36 @@ function RecipeList(props) {
               <input
                 type="text"
                 id={recipe.id}
-                name="recipeTitle"
+                name="title"
                 value={recipe.title}
                 required
-                onInput={props.changeOfRecipeTitle}
-                onKeyDown={(event, id) =>
-                  props.onEnterGetUpdatedRecipeList(event, recipe.id)
-                }
+                onInput={props.changeOfRecipe}
               ></input>
 
-              <button
+              {/* <button
                 id={recipe.id}
                 className="recipeList--item-updateTextButton"
                 onClick={() => props.getUpdatedRecipeList(recipe.id)}
               >
-                <ChevronRight size={20} />
-              </button>
+                <ChevronRight size={20} /> */}
+              {/* </button> */}
             </div>
             <div className="recipeList--item-descriptionWrap">
               <input
                 type="text"
                 id={recipe.id}
-                name="recipeDescription"
+                name="description"
                 value={recipe.description}
                 required
-                onInput={props.changeOfRecipeDescription}
+                onInput={props.changeOfRecipe}
               ></input>
-              <button
+              {/* <button
                 id={recipe.id}
                 className="recipeList--item-updateTextButton"
-                onClick={() => {
-                  props.getUpdatedRecipeListWithNewDescription(recipe.id);
-                }}
+                onClick={() => props.getUpdatedRecipeList(recipe.id)}
               >
                 <ChevronRight size={20} />
-              </button>
+              </button> */}
             </div>
 
             <img
