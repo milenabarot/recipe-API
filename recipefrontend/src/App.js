@@ -15,6 +15,7 @@ const App = createReactClass({
       searchValue: "",
       recipeList: [],
       isRecipeListLoading: true,
+      // isPatchRequestCompleted: false,
       newRecipe: {
         title: "",
         description: "",
@@ -94,23 +95,23 @@ const App = createReactClass({
 
   //function to update recipe TITLE &/OR DESCRIPTION, and update state
 
-  changeOfRecipe(event) {
-    let updatedRecipeList = [...this.state.recipeList];
+  // changeOfRecipe(event) {
+  //   let updatedRecipeList = [...this.state.recipeList];
 
-    const index = updatedRecipeList.findIndex((recipe) => {
-      return recipe.id === event.target.id;
-    });
-    updatedRecipeList[index] = {
-      ...updatedRecipeList[index],
-      [event.target.name]: event.target.value,
-    };
+  //   const index = updatedRecipeList.findIndex((recipe) => {
+  //     return recipe.id === event.target.id;
+  //   });
+  //   updatedRecipeList[index] = {
+  //     ...updatedRecipeList[index],
+  //     [event.target.name]: event.target.value,
+  //   };
 
-    this.setState({
-      recipeList: updatedRecipeList,
-    });
+  //   this.setState({
+  //     recipeList: updatedRecipeList,
+  //   });
 
-    this.getUpdatedRecipeList(event.target.id);
-  },
+  //   this.getUpdatedRecipeList(event.target.id);
+  // },
 
   //once recipe title or description has been updated
   //patch request will be made to update database
@@ -132,6 +133,15 @@ const App = createReactClass({
         description: updatedDescription,
       })
       .then(() => {
+        this.setState({
+          isPatchRequestCompleted: true,
+        });
+        console.log("okay", this.state.isPatchRequestCompleted);
+        setTimeout(() => {
+          this.setState({
+            isPatchRequestCompleted: false,
+          });
+        }, 5000);
         this.getRecipeListData();
       })
       .catch((error) => {
@@ -254,6 +264,8 @@ const App = createReactClass({
           changeOfRecipe={this.changeOfRecipe}
           searchValue={this.state.searchValue}
           isRecipeListLoading={this.state.isRecipeListLoading}
+          // isPatchRequestCompleted={this.state.isPatchRequestCompleted}
+          getRecipeListData={this.getRecipeListData}
         />
       </div>
     );

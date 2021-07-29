@@ -1,6 +1,6 @@
 import "../styles/recipeList.scss";
 import _ from "lodash";
-import { ChevronRight, TrashCan } from "akar-icons";
+import RecipeItem from "../containers/recipeItem";
 
 function RecipeList(props) {
   const sortedRecipeList = _.orderBy(props.recipeList, ["dateAdded"], ["desc"]);
@@ -9,65 +9,14 @@ function RecipeList(props) {
     <ul className="recipeList">
       {sortedRecipeList.map((recipe, index) => {
         return (
-          <li key={index} className="recipeList--item">
-            <div className="recipeList--item-titleWrap">
-              <label htmlFor="recipeTitle"></label>
-              <input
-                type="text"
-                id={recipe.id}
-                name="title"
-                value={recipe.title}
-                required
-                onInput={props.changeOfRecipe}
-              ></input>
-
-              {/* <button
-                id={recipe.id}
-                className="recipeList--item-updateTextButton"
-                onClick={() => props.getUpdatedRecipeList(recipe.id)}
-              >
-                <ChevronRight size={20} /> */}
-              {/* </button> */}
-            </div>
-            <div className="recipeList--item-descriptionWrap">
-              <input
-                type="text"
-                id={recipe.id}
-                name="description"
-                value={recipe.description}
-                required
-                onInput={props.changeOfRecipe}
-              ></input>
-              {/* <button
-                id={recipe.id}
-                className="recipeList--item-updateTextButton"
-                onClick={() => props.getUpdatedRecipeList(recipe.id)}
-              >
-                <ChevronRight size={20} />
-              </button> */}
-            </div>
-
-            <img
-              src={recipe.image}
-              alt={recipe.title}
-              className="recipeList--item-image"
-            ></img>
-            <a
-              href={recipe.url}
-              target="_blank"
-              rel="noreferrer"
-              className="recipeList--item-link"
-            >
-              Link
-            </a>
-            <p>Added on: {new Date(recipe.dateAdded).toDateString()}</p>
-            <button
-              onClick={() => props.deleteRecipe(recipe.id)}
-              className="recipeList--item-deleteButton"
-            >
-              <TrashCan size={20} />
-            </button>
-          </li>
+          <RecipeItem
+            recipe={recipe}
+            key={index}
+            index={index}
+            deleteRecipe={props.deleteRecipe}
+            changeOfRecipe={props.changeOfRecipe}
+            getRecipeListData={props.getRecipeListData}
+          />
         );
       })}
       {!sortedRecipeList.length && props.searchValue && (
