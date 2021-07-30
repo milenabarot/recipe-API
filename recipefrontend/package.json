@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.8.3",
     "akar-icons": "^1.7.11",
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
     "framer-motion": "^4.1.17",
     "lodash": "^4.17.21",
     "node-sass": "^6.0.1",

@@ -6,7 +6,6 @@ import NewRecipe from "./components/newRecipe";
 import RecipeList from "./components/recipeList";
 import SearchRecipe from "./components/searchRecipe";
 import Header from "./components/header";
-import _ from "lodash";
 
 const App = createReactClass({
   getInitialState() {
@@ -92,69 +91,6 @@ const App = createReactClass({
         console.error(error);
       });
   },
-
-  //function to update recipe TITLE &/OR DESCRIPTION, and update state
-
-  // changeOfRecipe(event) {
-  //   let updatedRecipeList = [...this.state.recipeList];
-
-  //   const index = updatedRecipeList.findIndex((recipe) => {
-  //     return recipe.id === event.target.id;
-  //   });
-  //   updatedRecipeList[index] = {
-  //     ...updatedRecipeList[index],
-  //     [event.target.name]: event.target.value,
-  //   };
-
-  //   this.setState({
-  //     recipeList: updatedRecipeList,
-  //   });
-
-  //   this.getUpdatedRecipeList(event.target.id);
-  // },
-
-  //once recipe title or description has been updated
-  //patch request will be made to update database
-  // using lodash debounce method to call patch request after typing
-  // this funciton is now called in the above changeOfRecipe
-  //so doesn't need to be passed down as a prop separately
-
-  getUpdatedRecipeList: _.debounce(function (id) {
-    const { recipeList } = this.state;
-    const index = recipeList.findIndex((recipe) => {
-      return recipe.id === id;
-    });
-    const updatedTitle = recipeList[index].title;
-    const updatedDescription = recipeList[index].description;
-
-    axios
-      .patch("http://localhost:3000/recipes/" + id, {
-        title: updatedTitle,
-        description: updatedDescription,
-      })
-      .then(() => {
-        this.setState({
-          isPatchRequestCompleted: true,
-        });
-        console.log("okay", this.state.isPatchRequestCompleted);
-        setTimeout(() => {
-          this.setState({
-            isPatchRequestCompleted: false,
-          });
-        }, 5000);
-        this.getRecipeListData();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, 600),
-
-  //no longer need this function as lodash debounce handles update
-  // onEnterGetUpdatedRecipeList(event, id) {
-  //   if (event.key === "Enter") {
-  //     this.getUpdatedRecipeList(id);
-  //   }
-  // },
 
   //add new recipe
   //make a copy of recipeList first to then push newRecipe onto
@@ -264,7 +200,6 @@ const App = createReactClass({
           changeOfRecipe={this.changeOfRecipe}
           searchValue={this.state.searchValue}
           isRecipeListLoading={this.state.isRecipeListLoading}
-          // isPatchRequestCompleted={this.state.isPatchRequestCompleted}
           getRecipeListData={this.getRecipeListData}
         />
       </div>

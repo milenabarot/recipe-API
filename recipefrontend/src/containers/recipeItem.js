@@ -3,18 +3,23 @@ import { Check, TrashCan } from "akar-icons";
 import createReactClass from "create-react-class";
 import _ from "lodash";
 import axios from "axios";
+import classNames from "classnames";
 
 const RecipeItem = createReactClass({
   getInitialState() {
     return {
-      //   ...this.props.recipe,
-      title: this.props.recipe.title,
-      description: this.props.recipe.description,
+      title: {
+        value: this.props.recipe.title,
+        isTitleUpdated: false,
+      },
+      description: {
+        value: this.props.recipe.description,
+        isDescriptionUpdated: false,
+      },
       image: this.props.recipe.image,
       url: this.props.recipe.url,
       id: this.props.recipe.id,
       dateAdded: this.props.recipe.dateAdded,
-      isPatchRequestCompleted: false,
     };
   },
 
@@ -23,31 +28,28 @@ const RecipeItem = createReactClass({
   // as recipe is in its own container & the single recipe is mapped over in recipeList
   // and passed through as a prop just refer to it as this.state....
 
+  //function to update recipe TITLE &/OR DESCRIPTION, and update state
+  // of just the value key in the object
   changeOfRecipe(event) {
-    // let updatedRecipeList = [...this.props.recipeList];
-
-    // const index = updatedRecipeList.findIndex((recipe) => {
-    //   return recipe.id === event.target.id;
-    // });
-    // updatedRecipeList[index] = {
-    //   ...updatedRecipeList[index],
-    //   [event.target.name]: event.target.value,
-    // };
-
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: {
+        ...this.state[event.target.name],
+        value: event.target.value,
+      },
     });
 
-    this.getUpdatedRecipeList(event.target.id);
+    this.getUpdatedRecipeList(event, event.target.id);
   },
 
-  getUpdatedRecipeList: _.debounce(function (id) {
-    // const { recipeList } = this.props;
-    // const index = recipeList.findIndex((recipe) => {
-    //   return recipe.id === id;
-    // });
-    const updatedTitle = this.state.title;
-    const updatedDescription = this.state.description;
+  //once recipe title or description has been updated patch request will be made
+  //  to update database, & depending on if title or description has been edited the boolean value in that object
+  //  will be set to true and then back agin to false
+  // using lodash debounce method to call patch request after typing
+  // this funciton is now called in the above changeOfRecipe, doesn't need to be called separately
+
+  getUpdatedRecipeList: _.debounce(function (event, id) {
+    const updatedTitle = this.state.title.value;
+    const updatedDescription = this.state.description.value;
 
     axios
       .patch("http://localhost:3000/recipes/" + id, {
@@ -55,15 +57,37 @@ const RecipeItem = createReactClass({
         description: updatedDescription,
       })
       .then(() => {
-        this.setState({
-          isPatchRequestCompleted: true,
-        });
-
-        setTimeout(() => {
+        if (event.target.name === "title") {
           this.setState({
-            isPatchRequestCompleted: false,
+            title: {
+              ...this.state.title,
+              isTitleUpdated: true,
+            },
           });
-        }, 5000);
+          setTimeout(() => {
+            this.setState({
+              title: {
+                ...this.state.title,
+                isTitleUpdated: false,
+              },
+            });
+          }, 5000);
+        } else {
+          this.setState({
+            description: {
+              ...this.state.description,
+              isDescriptionUpdated: true,
+            },
+          });
+          setTimeout(() => {
+            this.setState({
+              description: {
+                ...this.state.description,
+                isDescriptionUpdated: false,
+              },
+            });
+          }, 5000);
+        }
         this.props.getRecipeListData();
       })
       .catch((error) => {
@@ -81,38 +105,40 @@ const RecipeItem = createReactClass({
             type="text"
             id={this.state.id}
             name="title"
-            value={this.state.title}
+            value={this.state.title.value}
             required
             onInput={this.changeOfRecipe}
           ></input>
-          {this.state.isPatchRequestCompleted && (
-            <button
-              id={this.state.id}
-              className="recipeList--item-updateTextButton"
-            >
-              <Check size={20} />
-            </button>
-          )}
+          <button
+            id={this.state.id}
+            className={classNames("recipeList--item-updateTextButton", {
+              "recipeList--item-updateTextButton__is-highlighted":
+                this.state.title.isTitleUpdated,
+            })}
+          >
+            <Check size={20} />
+          </button>
         </div>
         <div className="recipeList--item-descriptionWrap">
           <input
             type="text"
             id={this.state.id}
             name="description"
-            value={this.state.description}
+            value={this.state.description.value}
             required
             onInput={this.changeOfRecipe}
           ></input>
-          {this.state.isPatchRequestCompleted && (
-            <button
-              id={this.state.id}
-              className="recipeList--item-updateTextButton"
-            >
-              <Check size={20} />
-            </button>
-          )}
-        </div>
 
+          <button
+            id={this.state.id}
+            className={classNames("recipeList--item-updateTextButton", {
+              "recipeList--item-updateTextButton__is-highlighted":
+                this.state.description.isDescriptionUpdated,
+            })}
+          >
+            <Check size={20} />
+          </button>
+        </div>
         <img
           src={this.state.image}
           alt={this.state.title}
