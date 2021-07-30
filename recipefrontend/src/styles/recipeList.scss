@@ -36,18 +36,19 @@
       background-color: transparent;
       border: 2px solid transparent;
       cursor: pointer;
-      color: black;
       padding: 3px;
       border-radius: 5px;
       font-size: 10px;
       transition: 0.3s ease-in-out;
       margin: 5px 5px 7px 12px;
       font-family: $main-font-family;
-      color: $main-font-color;
+      color: transparent;
 
-      &:hover {
+      &__is-highlighted {
         background-color: $mid-yellow;
-        border: 2px solid lightgrey;
+        border: 2px solid $mid-yellow;
+        color: black;
+        color: $main-font-color;
       }
     }
 
@@ -95,6 +96,13 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      &:hover {
+        outline: none;
+      }
+      &:focus {
+        outline: none;
+      }
     }
   }
 }
