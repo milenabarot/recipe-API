@@ -77,7 +77,7 @@ router.get("/:recipeId", async (req, res) => {
 //Delete post
 router.delete("/:recipeId", async (req, res) => {
   try {
-    const removedRecipe = await Recipe.remove({ _id: req.params.recipeId });
+    const removedRecipe = await Recipe.deleteOne({ _id: req.params.recipeId });
     res.json(removedRecipe);
   } catch (err) {
     res.json({ message: err });

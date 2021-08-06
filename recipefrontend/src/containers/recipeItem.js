@@ -95,8 +95,15 @@ const RecipeItem = createReactClass({
       });
   }, 600),
 
+  //delete recipe
+  deleteRecipe(id) {
+    console.log(this.state.id);
+    axios.delete("http://localhost:3000/recipes/" + id).then(() => {
+      this.props.getRecipeListData();
+    });
+  },
+
   render() {
-    const { props } = this;
     return (
       <li className="recipeList--item">
         <div className="recipeList--item-titleWrap">
@@ -141,7 +148,7 @@ const RecipeItem = createReactClass({
         </div>
         <img
           src={this.state.image}
-          alt={this.state.title}
+          alt={this.state.title.value}
           className="recipeList--item-image"
         ></img>
         <a
@@ -154,7 +161,7 @@ const RecipeItem = createReactClass({
         </a>
         <p>Added on: {new Date(this.state.dateAdded).toDateString()}</p>
         <button
-          onClick={() => props.deleteRecipe(this.state.id)}
+          onClick={() => this.deleteRecipe(this.state.id)}
           className="recipeList--item-deleteButton"
         >
           <TrashCan size={20} />

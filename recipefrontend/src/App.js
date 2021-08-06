@@ -14,7 +14,6 @@ const App = createReactClass({
       searchValue: "",
       recipeList: [],
       isRecipeListLoading: true,
-      // isPatchRequestCompleted: false,
       newRecipe: {
         title: "",
         description: "",
@@ -109,6 +108,7 @@ const App = createReactClass({
           dateAdded: response.data.dateAdded,
           id: response.data._id,
         };
+
         recipeListWithANewRecipe.push(updatedRecipeWithNewId);
 
         this.setState({
@@ -121,17 +121,11 @@ const App = createReactClass({
             dateAdded: new Date(),
           },
         });
+        this.getRecipeListData();
       })
       .catch((error) => {
         console.error(error);
       });
-  },
-
-  //delete recipe
-  deleteRecipe(id) {
-    axios.delete("http://localhost:3000/recipes/" + id).then(() => {
-      this.getRecipeListData();
-    });
   },
 
   //search for recipe

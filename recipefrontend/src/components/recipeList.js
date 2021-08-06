@@ -11,10 +11,8 @@ function RecipeList(props) {
         return (
           <RecipeItem
             recipe={recipe}
-            key={index}
+            key={recipe.id}
             index={index}
-            deleteRecipe={props.deleteRecipe}
-            changeOfRecipe={props.changeOfRecipe}
             getRecipeListData={props.getRecipeListData}
           />
         );
