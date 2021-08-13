@@ -6,6 +6,13 @@ import NewRecipe from "./components/newRecipe";
 import RecipeList from "./components/recipeList";
 import SearchRecipe from "./components/searchRecipe";
 import Header from "./components/header";
+import styled, { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "./themes/themes";
+
+const StyledApp = styled.div`
+  color: ${(props) => props.theme.fontColor};
+  background-color: ${(props) => props.theme.body};
+`;
 
 const App = createReactClass({
   getInitialState() {
@@ -14,6 +21,7 @@ const App = createReactClass({
       searchValue: "",
       recipeList: [],
       isRecipeListLoading: true,
+      theme: "light",
       newRecipe: {
         title: "",
         description: "",
@@ -172,31 +180,49 @@ const App = createReactClass({
     }
   },
 
+  // theme toggler
+
+  themeToggler() {
+    if (this.state.theme === "light") {
+      this.setState({
+        theme: "dark",
+      });
+    } else {
+      this.setState({
+        theme: "light",
+      });
+    }
+  },
+
   render() {
     return (
-      <div className="App">
-        <Header />
-        <SearchRecipe
-          searchValue={this.state.searchValue}
-          updateSearchValueInput={this.updateSearchValueInput}
-          searchBarRef={this.searchBarRef}
-          searchRecipe={this.searchRecipe}
-          onKeyUpSearchRecipeInput={this.onKeyUpSearchRecipeInput}
-        />
-        <NewRecipe
-          newRecipeOnSubmit={this.newRecipeOnSubmit}
-          newRecipe={this.state.newRecipe}
-          newRecipeInputChange={this.newRecipeInputChange}
-        />
-        <RecipeList
-          recipeList={this.state.recipeList}
-          deleteRecipe={this.deleteRecipe}
-          changeOfRecipe={this.changeOfRecipe}
-          searchValue={this.state.searchValue}
-          isRecipeListLoading={this.state.isRecipeListLoading}
-          getRecipeListData={this.getRecipeListData}
-        />
-      </div>
+      <ThemeProvider
+        theme={this.state.theme === "light" ? lightTheme : darkTheme}
+      >
+        <StyledApp className="App">
+          <Header themeToggler={this.themeToggler} />
+          <SearchRecipe
+            searchValue={this.state.searchValue}
+            updateSearchValueInput={this.updateSearchValueInput}
+            searchBarRef={this.searchBarRef}
+            searchRecipe={this.searchRecipe}
+            onKeyUpSearchRecipeInput={this.onKeyUpSearchRecipeInput}
+          />
+          <NewRecipe
+            newRecipeOnSubmit={this.newRecipeOnSubmit}
+            newRecipe={this.state.newRecipe}
+            newRecipeInputChange={this.newRecipeInputChange}
+          />
+          <RecipeList
+            recipeList={this.state.recipeList}
+            deleteRecipe={this.deleteRecipe}
+            changeOfRecipe={this.changeOfRecipe}
+            searchValue={this.state.searchValue}
+            isRecipeListLoading={this.state.isRecipeListLoading}
+            getRecipeListData={this.getRecipeListData}
+          />
+        </StyledApp>
+      </ThemeProvider>
     );
   },
 });

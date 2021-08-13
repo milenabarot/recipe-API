@@ -5,6 +5,12 @@ import _ from "lodash";
 import axios from "axios";
 import classNames from "classnames";
 
+import styled from "styled-components";
+
+const StyledRecipeListItem = styled.li`
+  background-color: ${(props) => props.theme.cardColor};
+`;
+
 const RecipeItem = createReactClass({
   getInitialState() {
     return {
@@ -105,7 +111,7 @@ const RecipeItem = createReactClass({
 
   render() {
     return (
-      <li className="recipeList--item">
+      <StyledRecipeListItem className="recipeList--item">
         <div className="recipeList--item-titleWrap">
           <label htmlFor="recipeTitle"></label>
           <input
@@ -166,7 +172,7 @@ const RecipeItem = createReactClass({
         >
           <TrashCan size={20} />
         </button>
-      </li>
+      </StyledRecipeListItem>
     );
   },
 });

@@ -20,6 +20,7 @@ const Header = createReactClass({
     const height = document.documentElement.scrollHeight;
     const { isConfettiShowing } = this.state;
     const { toggleConfetti } = this;
+    const { props } = this;
 
     return (
       <div className="header">
@@ -27,6 +28,9 @@ const Header = createReactClass({
           {isConfettiShowing ? <p>Turn me off</p> : <p>Click me!</p>}
         </button>
         <h1>Recipe App</h1>
+        <button className="App-darkMode" onClick={() => props.themeToggler()}>
+          Change Theme
+        </button>
         {isConfettiShowing && (
           <Confetti
             width={width}

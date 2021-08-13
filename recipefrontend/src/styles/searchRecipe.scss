@@ -37,7 +37,7 @@
     border-top-left-radius: 1000px;
     border-bottom-left-radius: 1000px;
     font-family: $main-font-family;
-    color: $main-font-color;
+    color: inherit;
   }
   &--button {
     background-color: transparent;
@@ -46,7 +46,7 @@
     border-bottom: none;
     border-top: none;
     cursor: pointer;
-    color: $main-font-color;
+    color: inherit;
     font-family: $main-font-family;
     padding: 0 38px;
     border-radius: 1000px;
