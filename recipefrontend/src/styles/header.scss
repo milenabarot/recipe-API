@@ -5,28 +5,52 @@ h1 {
   font-size: 75px;
   font-weight: lighter;
   text-align: center;
+  margin-top: 0;
+  padding-top: 50px;
 }
 
-.header-confettiButton {
-  margin-left: 1%;
-  margin-top: 1%;
-  outline: none;
-  border: 2px solid $mid-gray;
-  background-color: transparent;
-  border-radius: 10px;
-  cursor: pointer;
-  position: fixed;
-  margin-top: -38px;
-  font-size: 15px;
-  transition: 0.5s ease-in-out;
-
-  &:hover {
-    background-color: $mid-yellow;
+.header {
+  &-buttonWrap {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+  }
+  &-confettiButton {
+    outline: none;
     border: 2px solid $mid-yellow;
-    transform: translateX(20%);
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 15px;
+    transition: 0.5s ease-in-out;
+    max-height: 40px;
+
+    &:hover {
+      background-color: $mid-yellow;
+      border: 2px solid $mid-yellow;
+      transform: translateX(20%);
+    }
+
+    p {
+      margin: 2px;
+    }
   }
 
-  p {
-    margin: 5px 2px;
+  &-themeTogglerButton {
+    outline: none;
+    border: 2px solid transparent;
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 20px;
+    font-size: 15px;
+    transition: 0.5s ease-in-out;
+
+    &:hover {
+      background-color: $mid-yellow;
+      border: 2px solid transparent;
+    }
   }
 }

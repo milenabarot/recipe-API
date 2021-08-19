@@ -1,13 +1,21 @@
 @use "./styles/_variables.scss" as *;
 
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: $pale-cream;
+  input {
+    color: inherit;
+  }
+  button {
+    color: inherit;
+  }
 }
 
 .App {
   font-family: $main-font-family;
   font-size: 20px;
-  color: $main-font-color;
 }
 
 // BEM FORMAT

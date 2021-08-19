@@ -13,7 +13,11 @@ function SearchRecipe(props) {
           ref={props.searchBarRef}
           placeholder="Find a Recipe..."
         />
-        <button className="searchRecipe--button" onClick={props.searchRecipe}>
+        <button
+          type="search"
+          className="searchRecipe--button"
+          onClick={props.searchRecipe}
+        >
           Search
         </button>
       </div>
