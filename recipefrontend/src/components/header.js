@@ -1,6 +1,7 @@
 import createReactClass from "create-react-class";
 import Confetti from "react-confetti";
 import "../styles/header.scss";
+import { MoonFill, Sun } from "akar-icons";
 
 const Header = createReactClass({
   getInitialState() {
@@ -24,13 +25,24 @@ const Header = createReactClass({
 
     return (
       <div className="header">
-        <button className="header-confettiButton" onClick={toggleConfetti}>
-          {isConfettiShowing ? <p>Turn me off</p> : <p>Click me!</p>}
-        </button>
+        <div className="header-buttonWrap">
+          <button className="header-confettiButton" onClick={toggleConfetti}>
+            {isConfettiShowing ? <p>No more confetti!</p> : <p>Click me!</p>}
+          </button>
+          <button
+            className="header-themeTogglerButton"
+            onClick={() => props.themeToggler()}
+          >
+            {props.theme === "light" ? (
+              <Sun size={40} />
+            ) : (
+              <MoonFill size={40} />
+            )}
+          </button>
+        </div>
+
         <h1>Recipe App</h1>
-        <button className="App-darkMode" onClick={() => props.themeToggler()}>
-          Change Theme
-        </button>
+
         {isConfettiShowing && (
           <Confetti
             width={width}

@@ -1,5 +1,8 @@
 @use "./styles/_variables.scss" as *;
 
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: $pale-cream;
   input {
@@ -13,24 +16,6 @@ body {
 .App {
   font-family: $main-font-family;
   font-size: 20px;
-  &-darkMode {
-    margin-left: 90%;
-    margin-top: 10%;
-    outline: none;
-    border: 2px solid $mid-gray;
-    background-color: transparent;
-    border-radius: 10px;
-    cursor: pointer;
-
-    margin-top: -38px;
-    font-size: 15px;
-    transition: 0.5s ease-in-out;
-
-    &:hover {
-      background-color: $mid-yellow;
-      border: 2px solid $mid-yellow;
-    }
-  }
 }
 
 // BEM FORMAT

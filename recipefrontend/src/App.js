@@ -200,7 +200,7 @@ const App = createReactClass({
         theme={this.state.theme === "light" ? lightTheme : darkTheme}
       >
         <StyledApp className="App">
-          <Header themeToggler={this.themeToggler} />
+          <Header themeToggler={this.themeToggler} theme={this.state.theme} />
           <SearchRecipe
             searchValue={this.state.searchValue}
             updateSearchValueInput={this.updateSearchValueInput}
