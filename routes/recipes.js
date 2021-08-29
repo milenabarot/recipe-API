@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 //search query get request using Query params with axios
 // instead of passing through the state and requesting the title
 // partial search using RegExp. i for case insensitive matching
-///recipes/search?searchValue=lasagne
+// /api/recipes/search?searchValue=lasagne
 
 router.get("/search", async (req, res) => {
   let regex = new RegExp(req.query.searchValue, "i");

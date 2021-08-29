@@ -15,10 +15,9 @@ const PORT = process.env.PORT || 5000;
 
 const recipesRoute = require("./routes/recipes");
 
-app.use(express.static("recipefrontend/build"));
-
 //Middleware
 
+app.use(express.static("recipefrontend/build"));
 app.use("/api/recipes", recipesRoute);
 
 //Routes
