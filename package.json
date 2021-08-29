@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon app.js",
+    "server": "concurrently \"npm:backend\" \"npm:frontend\"",
+    "backend": "nodemon app.js",
+    "frontend": "cd recipefrontend && npm start",
     "start": "node app.js",
     "heroku-postbuild": "cd recipefrontend && npm install && npm run build"
   },
@@ -12,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "concurrently": "^6.2.1",
     "cors": "^2.8.5",
     "create-react-class": "^15.7.0",
     "dotenv": "^9.0.2",
