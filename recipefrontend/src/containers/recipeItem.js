@@ -58,7 +58,7 @@ const RecipeItem = createReactClass({
     const updatedDescription = this.state.description.value;
 
     axios
-      .patch("http://localhost:3000/recipes/" + id, {
+      .patch("/api/recipes/" + id, {
         title: updatedTitle,
         description: updatedDescription,
       })
@@ -104,7 +104,7 @@ const RecipeItem = createReactClass({
   //delete recipe
   deleteRecipe(id) {
     console.log(this.state.id);
-    axios.delete("http://localhost:3000/recipes/" + id).then(() => {
+    axios.delete("/api/recipes/" + id).then(() => {
       this.props.getRecipeListData();
     });
   },

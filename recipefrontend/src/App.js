@@ -70,7 +70,7 @@ const App = createReactClass({
   // get recipes data
   getRecipeListData() {
     axios
-      .get("http://localhost:3000/recipes")
+      .get("/api/recipes")
       .then((response) => {
         const recipes = response.data.map((recipeData) => {
           const title = recipeData.title;
@@ -106,7 +106,7 @@ const App = createReactClass({
     let recipeListWithANewRecipe = [...this.state.recipeList];
 
     axios
-      .post("http://localhost:3000/recipes", this.state.newRecipe)
+      .post("/api/recipes", this.state.newRecipe)
       .then((response) => {
         const updatedRecipeWithNewId = {
           title: response.data.title,
@@ -147,7 +147,7 @@ const App = createReactClass({
     };
     if (searchValue !== "") {
       axios
-        .get("http://localhost:3000/recipes/search", { params })
+        .get("/api/recipes/search", { params })
         .then((response) => {
           const searchRecipeListResults = response.data.map(
             (searchRecipeData) => {
