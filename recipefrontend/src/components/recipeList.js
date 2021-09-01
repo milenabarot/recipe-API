@@ -1,6 +1,7 @@
 import "../styles/recipeList.scss";
 import _ from "lodash";
 import RecipeItem from "../containers/recipeItem";
+import PropTypes from "prop-types";
 
 function RecipeList(props) {
   const sortedRecipeList = _.orderBy(props.recipeList, ["dateAdded"], ["desc"]);
@@ -26,5 +27,17 @@ function RecipeList(props) {
     </ul>
   );
 }
+
+RecipeList.propTypes = {
+  recipeList: PropTypes.array,
+  searchValue: PropTypes.string,
+  isRecipeListLoading: PropTypes.bool,
+};
+
+RecipeList.defaultProps = {
+  searchValue: "",
+  recipeList: [],
+  isRecipeListLoading: true,
+};
 
 export default RecipeList;

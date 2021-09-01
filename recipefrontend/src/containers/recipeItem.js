@@ -4,7 +4,7 @@ import createReactClass from "create-react-class";
 import _ from "lodash";
 import axios from "axios";
 import classNames from "classnames";
-
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const StyledRecipeListItem = styled.li`
@@ -176,5 +176,27 @@ const RecipeItem = createReactClass({
     );
   },
 });
+
+RecipeItem.propTypes = {
+  recipe: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    url: PropTypes.string,
+    id: PropTypes.string,
+    dateAdded: PropTypes.string,
+  }),
+};
+
+RecipeItem.defaultProps = {
+  recipe: {
+    title: "",
+    description: "",
+    image: "",
+    url: "",
+    id: "",
+    dateAdded: "",
+  },
+};
 
 export default RecipeItem;

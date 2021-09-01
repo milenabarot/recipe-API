@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import createReactClass from "create-react-class";
 import { motion, AnimatePresence } from "framer-motion";
 import { CirclePlusFill } from "akar-icons";
+import PropTypes from "prop-types";
 
 Modal.setAppElement("#root");
 
@@ -114,5 +115,25 @@ const NewRecipe = createReactClass({
     );
   },
 });
+
+NewRecipe.propTypes = {
+  newRecipe: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    url: PropTypes.string,
+  }),
+};
+
+NewRecipe.defaultProps = {
+  newRecipe: {
+    title: "",
+    description: "",
+    image: "",
+    url: "",
+  },
+  onSubmitRecipe: () => {},
+  newRecipeInputChange: () => {},
+};
 
 export default NewRecipe;

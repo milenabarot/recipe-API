@@ -1,4 +1,5 @@
 import "../styles/searchRecipe.scss";
+import PropTypes from "prop-types";
 
 function SearchRecipe(props) {
   return (
@@ -24,5 +25,21 @@ function SearchRecipe(props) {
     </div>
   );
 }
+
+SearchRecipe.propTypes = {
+  searchValue: PropTypes.string,
+  updateSearchValueInput: PropTypes.func,
+  onKeyUpSearchRecipeInput: PropTypes.func,
+  searchBarRef: PropTypes.object,
+  searchRecipe: PropTypes.func,
+};
+
+SearchRecipe.defaultProps = {
+  searchValue: "",
+  updateSearchValueInput: () => {},
+  onKeyUpSearchRecipeInput: () => {},
+  searchBarRef: {},
+  searchRecipe: () => {},
+};
 
 export default SearchRecipe;

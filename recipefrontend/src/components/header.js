@@ -2,6 +2,7 @@ import createReactClass from "create-react-class";
 import Confetti from "react-confetti";
 import "../styles/header.scss";
 import { MoonFill, Sun } from "akar-icons";
+import PropTypes from "prop-types";
 
 const Header = createReactClass({
   getInitialState() {
@@ -63,4 +64,14 @@ const Header = createReactClass({
     );
   },
 });
+
+Header.propTypes = {
+  theme: PropTypes.oneOf(["light", "dark"]),
+  themeToggler: PropTypes.func,
+};
+
+Header.defaultProps = {
+  themeToggler: () => {},
+};
+
 export default Header;
